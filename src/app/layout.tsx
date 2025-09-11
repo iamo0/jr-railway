@@ -1,8 +1,9 @@
-import "./globals.css";
+import BurgerMenu from "@/components/burger-menu/burder-menu";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import "./globals.css";
 
 const poppinsFont = Poppins({
   subsets: ['latin'],
@@ -28,14 +29,16 @@ export default function RootLayout({
           <Link href="/">
             <Image src="logo.svg" alt="Railway" width={73} height={51} />
           </Link>
-          <nav>
-            <ul>
-              <li><Link href="/mobile">Mobile App</Link></li>
-              <li><Link href="/faq">FAQs</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
-              <li><Link href="/signup">Sign Up</Link></li>
-            </ul>
-          </nav>
+          <BurgerMenu>
+            <nav>
+              <ul>
+                <li><Link href="/mobile">Mobile App</Link></li>
+                <li><Link href="/faq">FAQs</Link></li>
+                <li><Link href="/contact">Contact</Link></li>
+                <li><Link href="/signup">Sign Up</Link></li>
+              </ul>
+            </nav>
+          </BurgerMenu>
         </header>
 
         {children}
