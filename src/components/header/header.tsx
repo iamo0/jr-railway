@@ -2,7 +2,7 @@ import styles from "./header.module.css";
 
 import Link from "next/link";
 import Image from "next/image";
-import BurgerMenu from "../burger-menu/burder-menu";
+import BurgerMenu from "../burger-menu/burger-menu";
 
 export default function Header() {
   return <header className={styles.header}>
