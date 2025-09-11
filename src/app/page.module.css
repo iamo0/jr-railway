@@ -1,3 +1,48 @@
-.main {
-  background: transparent;
+.pageHeader {
+  color: var(--primary);
+  font-size: 32px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.searchField {
+  border: 0;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.searchField label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.searchField input {
+  background: var(--input-bg);
+  border: 0;
+  border-radius: 16px;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 16px 24px;
+}
+
+.searchSubmit {
+  background: var(--primary);
+  border: 0;
+  border-radius: 16px;
+  color: var(--inversed-font);
+  font-family: var(--font-family);
+  font-size: 20px;
+  font-weight: 900;
+  padding: 16px 20px;
 }
