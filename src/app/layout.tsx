@@ -27,7 +27,9 @@ export default function RootLayout({
       <body className={`${poppinsFont.variable}`}>
         <Header />
 
-        {children}
+        <main className="main">
+          {children}
+        </main>
 
         <Footer />
       </body>
