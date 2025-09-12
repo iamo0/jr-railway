@@ -1,0 +1,13 @@
+.radio {
+  display: none;
+}
+
+.label {
+  background: url("/icon-radio.svg") no-repeat left center;
+  font-size: 12px;
+  padding-left: 26px;
+}
+
+input[type=radio]:checked + .label {
+  background-image: url("/icon-radio-checked.svg");
+}
