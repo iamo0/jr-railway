@@ -34,7 +34,7 @@
   font-weight: 600;
 }
 
-.searchField input {
+.searchInput {
   background: var(--input-bg);
   border: 0;
   border-radius: 16px;
@@ -43,6 +43,13 @@
   font-weight: 500;
   line-height: 1.5;
   padding: 16px 24px;
+}
+
+.passengersInput::before {
+  content: url("/icon-person.svg");
+  display: inline-block;
+  transform: translateY(2px);
+  vertical-align: middle;
 }
 
 .searchSubmit {

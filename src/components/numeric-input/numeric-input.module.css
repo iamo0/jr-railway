@@ -1,0 +1,54 @@
+.numericInput {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.controlButton {
+  background: transparent;
+  border: none;
+  font-size: 0;
+}
+
+.controlButton:disabled::before {
+  cursor: not-allowed;
+  filter: grayscale(100%);
+  opacity: 0.3;
+}
+
+.controlButtonDecrease {
+  order: 1;
+}
+
+.controlButtonDecrease::before {
+  content: url("/icon-minus.svg");
+}
+
+.input {
+  appearance: textfield;
+  -moz-appearance: textfield;
+  background: transparent;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  order: 2;
+  padding: 0 5px;
+  text-align: center;
+  width: 1em;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.controlButtonIncrease {
+  order: 3;
+}
+
+.controlButtonIncrease::before {
+  content: url("/icon-plus.svg");
+}

@@ -14,12 +14,13 @@ export default function LabelledRadioButton({
   name,
   value,
   id,
+  style = {},
 }: LabelledRadioButtonProps) {
   return <>
     <input
       type="radio" id={id} name={name} value={value} defaultChecked={defaultChecked}
       className={styles.radio}
     />
-    <label htmlFor={id} className={styles.label}>{children}</label>
+    <label htmlFor={id} className={styles.label} style={style}>{children}</label>
   </>;
 }
