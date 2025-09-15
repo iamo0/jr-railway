@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "./labelled-radio-button.module.css";
 
 import { PropsWithChildren } from "react";

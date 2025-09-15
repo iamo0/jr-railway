@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./page.module.css";
 
 import LabelledRadioButton from "@/components/labelled-radio-button/labelled-radio-button";
@@ -8,8 +10,16 @@ export default function Home() {
     <h1 className={styles.pageHeader}>Search Results</h1>
     <form className={styles.search}>
       <fieldset className={`${styles.searchField} ${styles.searchFieldInline}`}>
-        <LabelledRadioButton style={{ whiteSpace: "nowrap" }} id="search-type-one-way" name="search-type" value="one-way" defaultChecked>One Way</LabelledRadioButton>
+        <LabelledRadioButton
+          style={{ whiteSpace: "nowrap" }}
+          id="search-type-one-way"
+          name="search-type"
+          value="one-way"
+          defaultChecked
+        >One Way</LabelledRadioButton>
+
         <LabelledRadioButton style={{ whiteSpace: "nowrap" }} id="search-type-round-trip" name="search-type" value="round-trip">Round Trip</LabelledRadioButton>
+
         <NumericInput className={styles.passengersInput} id="search-passengers" name="search-passengers" step={1} min={1} max={10} defaultValue={1} />
       </fieldset>
 
