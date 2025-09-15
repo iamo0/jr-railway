@@ -108,3 +108,63 @@ function someComponent() {
   например два `value` и это разные `value`, потому что одно из них из виртуального
   DOM-дерева, а второе — из настоящего)
 
+## useReducer vs useState
+1. `useState` используется если значение атомарное или примитивного типа
+2. `useReducer` используется если значение сложное
+
+```jsx
+function Component({ defaultValue }) {
+  const [searchString, setSearchString] = useState(defaultValue);
+  const [searchParams, setSearchParams] = useReducer();
+
+  const handleChange = function handleChange(evt) {
+    setSearchString(evt.target.value);
+  };
+
+  return <input type="search" value={searchString} onChange={handleChange} />
+}
+```
+
+Функция обновления значения в `state` обновляет значение целиком
+
+Функция обновления значения в редьюсере обновляет значение точечно
+
+```jsx
+function UserSettings() {
+  // Императивный стиль — управление состоянием происходит явно, вам
+  // нужно полностью контролировать способ вызова и работу функции
+  const [userSettingsState, setUserSettings] = useState({
+    isDarkTheme: false,
+    isNotificationsEnabled: false,
+    username: "iamo0",
+    userpic: "/public/iamo0.svg",
+    preferredTheme: "monokai",
+    favoriteHotels: [],
+  });
+
+  setUserSettings({
+    ...userSettingsState,
+    favoriteHotels: [...userSettingsState.favoriteHotels, "123"],
+  });
+
+  // Декларативный стиль — управление состоянием производится неявно
+  // (в сторого определенном контролируемом контексте), а вызов изменения
+  // состояния скорее является "запросом" на изменение этого состояния
+  // чем прямым управлением
+  const [userSettings, dispatch] = useReducer(userSettingsReducer, {
+    isDarkTheme: false,
+    isNotificationsEnabled: false,
+    username: "iamo0",
+    userpic: "/public/iamo0.svg",
+    preferredTheme: "monokai",
+    favoriteHotels: [],
+  });
+
+  dispatch({
+    action: "ADD_FAVORITE_HOTEL",
+    payload: {
+      id: "123",
+    },
+  });
+}
+```
