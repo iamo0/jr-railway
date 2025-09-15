@@ -1,0 +1,11 @@
+.burgerContainer summary {
+  font-size: 0;
+}
+
+.burgerContainer summary::after {
+  content: url("/icon-burger.svg");
+}
+
+.burgerContainer[open] summary::after {
+  content: url("/icon-close.svg");
+}

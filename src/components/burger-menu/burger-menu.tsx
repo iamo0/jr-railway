@@ -1,17 +1,18 @@
 "use client";
 
+import styles from "./burger-menu.module.css";
+
 import { PropsWithChildren, ReactNode } from "react";
-import Image from "next/image";
 
 interface BurgerMenuProps extends PropsWithChildren {
   caption?: ReactNode,
 };
 
 export default function BurgerMenu({children}: BurgerMenuProps) {
-  return <details>
+  return <details className={styles.burgerContainer}>
     <summary style={{
       listStyle: "none",
-    }}><Image src="icon-burger.svg" alt="Show details" width={30} height={24} /></summary>
+    }}>Details...</summary>
     {children}
   </details>;
 }
