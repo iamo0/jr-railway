@@ -49,12 +49,22 @@ function searchDataReducer(state: SearchData, {type, payload}: SearchDataReducer
 
 export default function SearchForm() {
   const [searchData, dispatch] = useReducer(searchDataReducer, {
-    travelType: TravelType.ONE_WAY,
+    travelType: TravelType.ROUND_TRIP,
     passengers: 2,
     departure: "",
     arrival: "",
-    dateDeparture: Date.now(),
-    dateArrival: Date.now() + 1000 * 60 * 60 * 24,
+    dateDeparture: (function() {
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
+      now.setDate(now.getDate() + 1);
+      return now.getTime();
+    })(),
+    dateArrival: (function() {
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
+      now.setDate(now.getDate() + 2);
+      return now.getTime();
+    })(),
   });
 
   const validationMessages = useMemo(function() {
@@ -65,7 +75,7 @@ export default function SearchForm() {
       () => searchData.arrival.trim() === "" ? "Travel destination is not set" : null,
       () => searchData.arrival === searchData.departure && searchData.arrival.trim() !== "" ? "Destination couldn't be the same place as departure place" : null,
       () => searchData.dateDeparture && searchData.dateDeparture < Date.now() ? "Departure date is in the past" : null,
-      () => searchData.travelType === TravelType.ROUND_TRIP && searchData.dateArrival <= searchData.dateDeparture ? "Arrival date should be after departure date" : null,
+      () => searchData.travelType === TravelType.ROUND_TRIP && searchData.dateArrival < searchData.dateDeparture ? "Arrival date should be after departure date" : null,
     ]
       .map((f) => f())
       .filter(m => m);
