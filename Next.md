@@ -200,3 +200,59 @@ useEffect(function() {
   console.log(state);
 });
 ```
+
+## Трюк для условного рендеринга в React
+Бывает так, что иногда вам нужно не отрисовывать определенный компонент
+в зависимости от определенных условий
+
+```jsx
+// Неправильный подход, потому что тут генерируются два дерева
+if (userIsLoggedIn) {
+  return <header>
+    Header stuff
+  </header>
+}
+
+return <header>
+  <Button>Log in</Button>
+  Header stuff
+</header>
+
+```
+
+Сравним два подхода к удалению элементов из дерева:
+
+```
+I. Прямое удаление
+1 2 3 4 5
+1 3 4 5
+===
+1 1
+2 3
+3 4
+4 5
+5
+
+II. Пометка как удаленного
+1 2    3 4 5
+1 null 3 4 5
+
+1 1
+2 null
+3 3
+4 4
+5 5
+```
+
+```jsx
+return <header>
+  Header stuff
+  {isUserLoggedIn ?
+    null :
+    <Button>Log in</Button>}
+</header>
+```
+
+
+
+
