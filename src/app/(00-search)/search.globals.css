@@ -1,0 +1,16 @@
+:root {
+  --background:    #010101;
+  --foreground:    #ffffff;
+  --primary:       #5E4AE3;
+  --inversed-font: #FFFFFF;
+  --input-bg:      #FFFFFF;
+  --input-font:    #010400;
+}
+
+html {
+  background: var(--background) url("/main-background.jpg") 50% 100% no-repeat;
+}
+
+body {
+  background-color: transparent;
+}

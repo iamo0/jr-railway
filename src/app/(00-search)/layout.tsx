@@ -1,9 +1,9 @@
-import "./globals.css";
+import "../globals.css";
+import "./search.globals.css";
 
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Header from "@/components/header/header";
-import Footer from "@/components/footer/footer";
 
 const poppinsFont = Poppins({
   subsets: ['latin'],
@@ -24,14 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppinsFont.variable}`}>
+      <body className={`${poppinsFont.variable} dark`}>
         <Header />
 
         <main className="main">
           {children}
         </main>
-
-        <Footer />
       </body>
     </html>
   );

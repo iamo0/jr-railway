@@ -1,9 +1,12 @@
 :root {
-  --background:    #f5f5f5;
-  --foreground:    #010400;
-  --primary:       #5E4AE3;
-  --inversed-font: #FFFFFF;
-  --input-bg:      #FFFFFF;
+  --background:      #f5f5f5;
+  --foreground:      #010400;
+  --primary:         #5E4AE3;
+  --inversed-font:   #FFFFFF;
+  --input-bg:        #FFFFFF;
+  --input-font:      #010400;
+  --menu-background: #010400;
+  --menu-font:       #FFFFFF;
 }
 
 html,

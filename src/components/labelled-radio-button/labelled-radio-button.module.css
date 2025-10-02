@@ -4,6 +4,7 @@
 
 .label {
   background: url("/icon-radio.svg") no-repeat left center;
+  color: var(--input-font);
   font-size: 12px;
   padding-left: 26px;
 }

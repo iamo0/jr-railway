@@ -1,6 +1,13 @@
 .header {
   align-items: center;
-  background: var(--background);
+  /* NB! 
+      Explicit background for header is needed 
+      because header is `sticky` so we add background
+      so header wouldn't be transparent when page is
+      scrolled.
+  */
+  /* background: var(--background); */
+  backdrop-filter: blur(20px);
   display: flex;
   flex-direction: row;
   height: 114px;
@@ -12,7 +19,7 @@
 }
 
 .headerNav {
-  background-color: var(--foreground);
+  background-color: var(--menu-background);
   left: 50%;
   height: 100vh;
   position: absolute;
@@ -37,7 +44,7 @@
 }
 
 .headerNavListLink {
-  color: var(--inversed-font);
+  color: var(--menu-font);
   font-size: 32px;
   text-decoration: none;
 }

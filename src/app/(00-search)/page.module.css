@@ -1,0 +1,14 @@
+.pageHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pageHeaderTitle {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.pageHeaderSubtitle {
+  font-size: 22px;
+}

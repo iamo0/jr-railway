@@ -1,0 +1,3 @@
+.dark .burger-menu summary::after {
+  filter: invert(100%);
+}

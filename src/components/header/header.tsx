@@ -1,12 +1,16 @@
 import styles from "./header.module.css";
+import "./header.css";
 
 import Link from "next/link";
 import Image from "next/image";
 import BurgerMenu from "../burger-menu/burger-menu";
+import { HTMLAttributes } from "react";
 
-export default function Header() {
-  return <header className={styles.header}>
-    <Link href="/">
+export default function Header({
+  className = "",
+}: HTMLAttributes<HTMLDivElement>) {
+  return <header className={`${styles.header} ${className}`}>
+    <Link href="/" className="header-logo">
       <Image src="logo.svg" alt="Railway" width={73} height={51} />
     </Link>
     <BurgerMenu>
