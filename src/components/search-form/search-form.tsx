@@ -5,20 +5,7 @@ import styles from "./search-form.module.css";
 import LabelledRadioButton from "../labelled-radio-button/labelled-radio-button";
 import NumericInput from "../numeric-input/numeric-input";
 import { useMemo, useReducer } from "react";
-
-enum TravelType {
-  ONE_WAY = 1,
-  ROUND_TRIP = 2,
-};
-
-type SearchData = {
-  travelType: TravelType,
-  passengers: number, // 1..10
-  departure: string,
-  arrival: string,
-  dateDeparture: number, // Всегда больше чем Date.now()
-  dateArrival: number, // Только дляROUND_TRIP. Всегда больше чем dateDeparture
-};
+import { SearchData, TravelType } from "@/types/search-data";
 
 type SearchDataReducerAction =
   | { type: "SET_TRAVEL_TYPE", payload: TravelType }
@@ -47,8 +34,12 @@ function searchDataReducer(state: SearchData, {type, payload}: SearchDataReducer
   }
 };
 
-export default function SearchForm() {
-  const [searchData, dispatch] = useReducer(searchDataReducer, {
+interface SearchFormProps {
+  defaultSearchData?: SearchData | null,
+}
+
+export default function SearchForm({ defaultSearchData }: SearchFormProps) {
+  const [searchData, dispatch] = useReducer(searchDataReducer, defaultSearchData ?? {
     travelType: TravelType.ROUND_TRIP,
     passengers: 2,
     departure: "",
