@@ -81,7 +81,7 @@ export default function SearchForm() {
       .filter(m => m);
   }, [searchData]);
 
-  return <form className={styles.search} method="GET">
+  return <form className={styles.search} method="GET" action="/search">
     <fieldset className={`${styles.searchField} ${styles.searchFieldInline}`}>
       <LabelledRadioButton
         style={{ whiteSpace: "nowrap" }}
