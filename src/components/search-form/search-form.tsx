@@ -6,6 +6,7 @@ import LabelledRadioButton from "../labelled-radio-button/labelled-radio-button"
 import NumericInput from "../numeric-input/numeric-input";
 import { useMemo, useReducer } from "react";
 import { SearchData, TravelType } from "@/types/search-data";
+import getValidationMessages from "./get-validation-messages";
 
 type SearchDataReducerAction =
   | { type: "SET_TRAVEL_TYPE", payload: TravelType }
@@ -58,18 +59,8 @@ export default function SearchForm({ defaultSearchData }: SearchFormProps) {
     })(),
   });
 
-  const validationMessages = useMemo(function() {
-    return [
-      () => searchData.passengers < 0 ? "Too few passengers" : null,
-      () => searchData.passengers > 10 ? "Too many passengers" : null,
-      () => searchData.departure.trim() === "" ? "Departure place is not set" : null,
-      () => searchData.arrival.trim() === "" ? "Travel destination is not set" : null,
-      () => searchData.arrival === searchData.departure && searchData.arrival.trim() !== "" ? "Destination couldn't be the same place as departure place" : null,
-      () => searchData.dateDeparture && searchData.dateDeparture < Date.now() ? "Departure date is in the past" : null,
-      () => searchData.travelType === TravelType.ROUND_TRIP && searchData.dateArrival < searchData.dateDeparture ? "Arrival date should be after departure date" : null,
-    ]
-      .map((f) => f())
-      .filter(m => m);
+  const validationMessages = useMemo(() => {
+    return getValidationMessages(searchData);
   }, [searchData]);
 
   return <form className={styles.search} method="GET" action="/search">

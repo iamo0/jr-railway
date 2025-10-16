@@ -3,7 +3,7 @@
 import styles from "./burger-menu.module.css";
 import "./burger-menu.css";
 
-import { PropsWithChildren, ReactNode } from "react";
+import React, { PropsWithChildren, ReactNode } from "react";
 
 interface BurgerMenuProps extends PropsWithChildren {
   caption?: ReactNode,
