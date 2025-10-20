@@ -2,6 +2,7 @@ import { SearchData, TravelType } from "@/types/search-data";
 import styles from "./page.module.css";
 
 import SearchForm from "@/components/search-form/search-form";
+import { now, roundDate } from "@/helpers/round-date";
 
 interface PageSearchParams {
   "search-type": "one-way" | "round-trip",
@@ -21,8 +22,8 @@ export default async function Page({ searchParams }: {
     passengers: parseInt(search["search-passengers"]),
     departure: search["search-departure"],
     arrival: search["search-arrival"],
-    dateDeparture: new Date(search["search-departure-date"]).getTime(),
-    dateArrival: search["search-arrival-date"] !== undefined ? new Date(search["search-arrival-date"]).getTime() : Date.now(),
+    dateDeparture: roundDate(search["search-departure-date"]),
+    dateArrival: (search["search-arrival-date"] !== undefined ? roundDate(search["search-arrival-date"]) : now()),
   } as SearchData;
 
   return <>

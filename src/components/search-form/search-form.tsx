@@ -7,6 +7,8 @@ import NumericInput from "../numeric-input/numeric-input";
 import { useMemo, useReducer } from "react";
 import { SearchData, TravelType } from "@/types/search-data";
 import getValidationMessages from "./get-validation-messages";
+import { now } from "@/helpers/round-date";
+import { formatToYYYYMMDD } from "@/helpers/date-format";
 
 type SearchDataReducerAction =
   | { type: "SET_TRAVEL_TYPE", payload: TravelType }
@@ -45,18 +47,8 @@ export default function SearchForm({ defaultSearchData }: SearchFormProps) {
     passengers: 2,
     departure: "",
     arrival: "",
-    dateDeparture: (function() {
-      const now = new Date();
-      now.setHours(0, 0, 0, 0);
-      now.setDate(now.getDate() + 1);
-      return now.getTime();
-    })(),
-    dateArrival: (function() {
-      const now = new Date();
-      now.setHours(0, 0, 0, 0);
-      now.setDate(now.getDate() + 2);
-      return now.getTime();
-    })(),
+    dateDeparture: (() => now())(),
+    dateArrival: (() => now() + 24 * 60 * 60 * 1000)(),
   });
 
   const validationMessages = useMemo(() => {
@@ -143,7 +135,7 @@ export default function SearchForm({ defaultSearchData }: SearchFormProps) {
         type="date"
         id="search-departure-date"
         name="search-departure-date"
-        value={new Date(searchData.dateDeparture).toISOString().slice(0, 10)}
+        value={formatToYYYYMMDD(new Date(searchData.dateDeparture))}
         onChange={(evt) => dispatch({
           type: "SET_DATE_DEPARTURE",
           payload: new Date(evt.target.value).getTime(),
@@ -157,7 +149,7 @@ export default function SearchForm({ defaultSearchData }: SearchFormProps) {
         id="search-arrival-date"
         name="search-arrival-date"
         disabled={searchData.travelType === TravelType.ONE_WAY}
-        value={new Date(searchData.dateArrival).toISOString().slice(0, 10)}
+        value={formatToYYYYMMDD(new Date(searchData.dateArrival))}
         onChange={(evt) => dispatch({
           type: "SET_DATE_ARRIVAL",
           payload: new Date(evt.target.value).getTime(),

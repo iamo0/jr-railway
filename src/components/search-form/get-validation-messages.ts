@@ -1,3 +1,4 @@
+import { now, roundDate } from "@/helpers/round-date";
 import { TravelType } from "../../types/search-data";
 
 interface SearchData {
@@ -16,7 +17,7 @@ export default function getValidationMessages(searchData: SearchData) {
     () => searchData.departure.trim() === "" ? "Departure place is not set" : null,
     () => searchData.arrival.trim() === "" ? "Travel destination is not set" : null,
     () => searchData.arrival === searchData.departure && searchData.arrival.trim() !== "" ? "Destination couldn't be the same place as departure place" : null,
-    () => searchData.dateDeparture && searchData.dateDeparture < Date.now() ? "Departure date is in the past" : null,
+    () => searchData.dateDeparture && roundDate(searchData.dateDeparture) < now() ? "Departure date is in the past" : null,
     () => searchData.travelType === TravelType.ROUND_TRIP && searchData.dateArrival < searchData.dateDeparture ? "Arrival date should be after departure date" : null,
   ]
     .map((f) => f())
