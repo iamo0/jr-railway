@@ -1,3 +1,4 @@
+import Header from "@/components/header/header";
 import "./globals.css";
 
 import type { Metadata } from "next";
@@ -20,6 +21,7 @@ export default function NotFound() {
   return (
     <html lang="en">
       <body className={`${poppinsFont.variable}`}>
+        <Header />
         <main className="main">
           <h1>Такой страницы нет!</h1>
           <p>Попробуйте <Link href="/">сначала</Link></p>
