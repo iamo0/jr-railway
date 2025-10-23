@@ -4,11 +4,12 @@ import styles from "./search-form.module.css";
 
 import LabelledRadioButton from "../labelled-radio-button/labelled-radio-button";
 import NumericInput from "../numeric-input/numeric-input";
-import { useMemo, useReducer } from "react";
+import { ChangeEvent, useMemo, useReducer } from "react";
 import { SearchData, TravelType } from "@/types/search-data";
 import getValidationMessages from "./get-validation-messages";
 import { now } from "@/helpers/round-date";
 import { formatToYYYYMMDD } from "@/helpers/date-format";
+import InputWithSuggest from "./input-with-suggest/input-with-suggest";
 
 type SearchDataReducerAction =
   | { type: "SET_TRAVEL_TYPE", payload: TravelType }
@@ -96,14 +97,15 @@ export default function SearchForm({ defaultSearchData }: SearchFormProps) {
 
     <fieldset className={styles.searchField}>
       <label className={styles.searchFieldLabel}>Departure</label>
-      <input
+      <InputWithSuggest
         className={styles.searchInput}
         placeholder="Your City/Station"
         type="text"
         id="search-departure"
+        listId="search-departure-values"
         name="search-departure"
         value={searchData.departure}
-        onChange={(evt) => dispatch({
+        onChange={(evt: ChangeEvent<HTMLInputElement>) => dispatch({
           type: "SET_DEPARTURE",
           payload: evt.target.value,
         })}
@@ -112,14 +114,15 @@ export default function SearchForm({ defaultSearchData }: SearchFormProps) {
 
     <fieldset className={styles.searchField}>
       <label className={styles.searchFieldLabel}>Arrival</label>
-      <input
+      <InputWithSuggest
         className={styles.searchInput}
         placeholder="Where To?"
         type="text"
         id="search-arrival"
+        listId="search-arrival-values"
         name="search-arrival"
         value={searchData.arrival}
-        onChange={(evt) => dispatch({
+        onChange={(evt: ChangeEvent<HTMLInputElement>) => dispatch({
           type: "SET_ARRIVAL",
           payload: evt.target.value,
         })}
