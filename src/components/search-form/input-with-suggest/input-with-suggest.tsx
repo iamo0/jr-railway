@@ -1,6 +1,8 @@
 "use client";
 
-import { ChangeEvent, HTMLAttributes, useState } from "react";
+import styles from "./input-with-suggest.module.css";
+
+import { ChangeEvent, HTMLAttributes, useEffect, useState } from "react";
 
 interface DataListOption {
   value: string,
@@ -23,22 +25,18 @@ interface InputWithSuggestProps extends HTMLAttributes<HTMLInputElement> {
 
 export default function InputWithSuggest(props: InputWithSuggestProps) {
   const {
+    className = "",
     defaultOptions = [
-      { value: "Москва", priority: true, },
-      { value: "Мурино" },
-      { value: "Санкт Петербург", priority: true, },
-      { value: "Нижнекамск" },
-      { value: "Нижневартовск" },
-      { value: "Нижний Тагил" },
-      { value: "Нижний Новгород", priority: true, },
-      { value: "Владивосток", priority: true, },
-      { value: "Вышний Волочек" },
-      { value: "Пекин", priority: true, },
-      { value: "Берлин", priority: true, },
-      { value: "Биробиджан" },
-      { value: "Лондон", priority: true, },
+      { value: "Москва" },
+      { value: "Санкт Петербург" },
+      { value: "Нижний Новгород" },
+      { value: "Владивосток" },
+      { value: "Пекин" },
+      { value: "Берлин" },
+      { value: "Лондон" },
     ],
     listId,
+    onChange = () => {},
     ...rest
   } = props;
 
@@ -49,28 +47,40 @@ export default function InputWithSuggest(props: InputWithSuggestProps) {
     data: defaultOptions.filter((o) => o.priority),
   });
 
-  function handleInputChange(evt: ChangeEvent<HTMLInputElement>) {
-    const value = evt.target.value;
-    setInputValue(value);
-
-    if (value.length < 2) {
+  useEffect(function () {
+    if (inputValue.length < 2) {
       setOptionsState({
         state: "idle",
-        data: defaultOptions.filter((o) => o.priority),
-      })
+        data: [...defaultOptions],
+      });
       return;
     }
 
     setOptionsState({
-      state: "idle",
-      data: [...defaultOptions],
+      ...optionsState,
+      state: "loading",
     });
+
+    fetch(`/api/cities/?search=${inputValue}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setOptionsState({
+          state: "idle",
+          data,
+        });
+      });
+  }, [inputValue]);
+
+  function handleInputChange(evt: ChangeEvent<HTMLInputElement>) {
+    const value = evt.target.value;
+    setInputValue(value);
+    onChange(evt);
   }
 
   return <>
-    <input autoComplete="off" list={listId} {...rest} value={inputValue} onChange={handleInputChange} />
+    <input className={`${className} ${styles.input} ${optionsState.state === "loading" ? styles.inputLoading : ``}`} autoComplete="off" autoCorrect="off" list={listId} {...rest} value={inputValue} onChange={handleInputChange} />
     <datalist id={listId}>
-      {optionsState.data.map(({value}) => <option value={value} key={value.replaceAll(" ", "-")} />)}
+      {optionsState.data.map(({ value }) => <option value={value} key={value.replaceAll(" ", "-")} />)}
     </datalist>
   </>;
 }

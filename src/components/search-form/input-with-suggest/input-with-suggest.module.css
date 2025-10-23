@@ -1,0 +1,19 @@
+.input {
+  border: solid 2px transparent;
+}
+
+.inputLoading {
+  animation: border 1s linear;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+@keyframes border {
+  0% {
+    border-color: transparent;
+  }
+
+  100% {
+    border-color: rgba(8, 118, 207, 0.594);
+  }
+}
