@@ -78,7 +78,7 @@ export default function InputWithSuggest(props: InputWithSuggestProps) {
   }
 
   return <>
-    <input className={`${className} ${styles.input} ${optionsState.state === "loading" ? styles.inputLoading : ``}`} autoComplete="off" autoCorrect="off" list={listId} {...rest} value={inputValue} onChange={handleInputChange} />
+    <input className={`${className} ${styles.input} ${optionsState.state === "loading" ? styles.inputLoading : ``}`} autoCapitalize="off" autoComplete="off" autoCorrect="off" list={listId} {...rest} value={inputValue} onChange={handleInputChange} />
     <datalist id={listId}>
       {optionsState.data.map(({ value }) => <option value={value} key={value.replaceAll(" ", "-")} />)}
     </datalist>
