@@ -6,7 +6,6 @@ import { ChangeEvent, HTMLAttributes, useEffect, useState } from "react";
 
 interface DataListOption {
   value: string,
-  priority?: true,
 }
 
 interface OptionsState {
@@ -44,7 +43,7 @@ export default function InputWithSuggest(props: InputWithSuggestProps) {
 
   const [optionsState, setOptionsState] = useState<OptionsState>({
     state: "idle",
-    data: defaultOptions.filter((o) => o.priority),
+    data: [...defaultOptions],
   });
 
   useEffect(function () {
